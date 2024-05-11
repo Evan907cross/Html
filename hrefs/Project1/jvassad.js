@@ -1,0 +1,1 @@
+const TextVar001 = "Var :)"
