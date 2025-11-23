@@ -1,0 +1,30 @@
+const e_math = {
+	lerp : (a,b,t) => a + (b-a) * t,
+	distance : function(v1,v2){
+		if(!(v1 instanceof vector4)){v1 = v1.Vec4ify()}
+		if(!(v2 instanceof vector4)){v2 = v2.Vec4ify()}
+		return Math.sqrt(Math.pow(v1.x - v2.x,2) + Math.pow(v1.y - v2.y,2) + Math.pow(v1.z - v2.z,2) + + Math.pow(v1.w - v2.w,2))
+	},
+	deg_to_rad : (deg) => deg * Math.PI/180,
+	rad_to_deg : (rad) => rad * 180/Math.PI,
+	rotate_2d_r : function(rad,point,origin){
+		point.x -= origin.x
+		point.y -= origin.y
+		
+		let dx = (point.x * Math.cos(rad)) - (point.y * Math.sin(rad))
+		let dy = (point.x * Math.sin(rad)) + (point.y * Math.cos(rad))
+		
+		return new vector2(dx + origin.x,dy + origin.y)
+	},
+	clamp :  (x,min=0,max=100) => Math.max(Math.min(x,max),min)
+}
+
+const lerp = (a,b,t) => e_math.lerp(a,b,t)
+const distance = (v1,v2) => e_math.distance(v1,v2)
+const deg_to_rad = (deg) => e_math.deg_to_rad(deg)
+const rad_to_deg = (rad) => e_math.rad_to_deg(rad)
+const clamp = (x,min=0,max=100) => e_math.clamp(x,min,max)
+
+
+const sin = (x) => Math.sin(x)
+const cos = (x) => Math.cos(x)
