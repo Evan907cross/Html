@@ -51,7 +51,6 @@ const vec2 = (x=0,y=0) => new vector2(x,y)
 const vec3 = (x = 0, y = 0, z = 0) => new vector3(x,y,z)
 const vec4 = (x = 0, y = 0, z = 0, w = 0) => new vector4(x,y,z,w)
 
-
 class rantangle2{
 	constructor(x = 0,y = 0,width = 1, height = 1){
 		this.x = x
@@ -93,24 +92,34 @@ class e_signal{
 
 
 class e_tween{
-	constructor(timems){
+	constructor(target,endValue,timems,updateRate = 15){
+		this.target = target
 		this.end_time = timems
 		this.start_date = null
+		this.initial_value = eval(target)
+		this.end_value = endValue
 		this.is_moving = false
-	}
-	GetNum(){
-		if(!this.is_moving){return 0}
+		this.update_interval = null
+		this.update_rate = updateRate
 		
-		const curDate = new Date()
-		const timePercent = (curDate - this.start_date) / this.end_time
-		if(timePercent >= 1){this.is_moving = false}
-		return Math.min(timePercent,1)
+		this.on_tween_end = new e_signal()
 	}
-	Start(){
+	Update(){
+		const curDate = new Date()
+		if((curDate - this.start_date) >= this.end_time){
+			this.Stop()
+		}
+		eval(this.target + "=" + lerp(this.initial_value,this.end_value,Math.min((curDate - this.start_date)/this.end_time,1)))
+		//console.log("Tick",(curDate - this.start_date))
+	}
+	Play(){
 		this.is_moving = true
 		this.start_date = new Date()
+		let a = this
+		this.update_interval = setInterval(function(){a.Update()},this.update_rate)
 	}
 	Stop(){
+		clearInterval(this.update_interval)
 		this.is_moving = false
 	}
 }
