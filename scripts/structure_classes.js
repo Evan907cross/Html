@@ -203,6 +203,9 @@ Array.prototype.Vec2ify = function(){
 	if(this.length >= 2){
 		return new vector2(this[0],this[1])
 	}else{
+		if(this.length == 1){
+			return new vector2(this[0])
+		}
 		console.warn("Failed to Vec2ify : Failed at %cLength Check","text-decoration: underline;")
 		return new vector2()
 	}
@@ -213,6 +216,9 @@ Array.prototype.Vec3ify = function(){
 		if(this.length == 2){return new vector2(this[0],this[1])}
 		return new vector3(this[0],this[1],this[2])
 	}else{
+		if(this.length == 1){
+			return new vector3(this[0])
+		}
 		console.warn("Failed to Vec3ify : Failed at %cLength Check","text-decoration: underline;")
 		return new vector3()
 	}
@@ -224,6 +230,9 @@ Array.prototype.Vec4ify = function(){
 		if(this.length == 3){return new vector3(this[0],this[1],this[2])}
 		return new vector4(this[0],this[1],this[2],this[3])
 	}else{
+		if(this.length == 1){
+			return new vector4(this[0])
+		}
 		console.warn("Failed to Vec4ify : Failed at %cLength Check","text-decoration: underline;")
 		return new vector4()
 	}
