@@ -1,3 +1,4 @@
+/* Vectors */
 class vector2{
 	constructor(x=0,y=0){
 		this.x = x
@@ -47,10 +48,12 @@ class vector4{
 	get yzw(){return new vector3(this.y,this.z,this.w)}
 }
 
+//vector quick hands
 const vec2 = (x=0,y=0) => new vector2(x,y)
 const vec3 = (x = 0, y = 0, z = 0) => new vector3(x,y,z)
 const vec4 = (x = 0, y = 0, z = 0, w = 0) => new vector4(x,y,z,w)
 
+/* Shape Classes */
 class rantangle2{
 	constructor(x = 0,y = 0,width = 1, height = 1){
 		this.x = x
@@ -63,6 +66,8 @@ class rantangle2{
 	get w(){this.height}
 }
 
+
+/* Misc Classes */
 class e_signal{
 	constructor(){
 		this._connections = {

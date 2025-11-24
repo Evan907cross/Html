@@ -19,6 +19,8 @@ const e_math = {
 	clamp :  (x,min=0,max=100) => Math.max(Math.min(x,max),min)
 }
 
+const parseBool = (x) => (x > 0)
+
 const lerp = (a,b,t) => e_math.lerp(a,b,t)
 const distance = (v1,v2) => e_math.distance(v1,v2)
 const deg_to_rad = (deg) => e_math.deg_to_rad(deg)
@@ -26,5 +28,10 @@ const rad_to_deg = (rad) => e_math.rad_to_deg(rad)
 const clamp = (x,min=0,max=100) => e_math.clamp(x,min,max)
 
 
+const pow = (base,exponent) => Math.pow(base,exponent)
+const sqrt = (x) => Math.sqrt(x)
+const cbrt = (x) => Math.cbrt(x)
+
+const tan = (x) => Math.tan(x)
 const sin = (x) => Math.sin(x)
 const cos = (x) => Math.cos(x)
