@@ -5,7 +5,8 @@ class vector2{
 		this.y = y
 	}
 	Listify(){return [this.x,this.y]}
-	get Magitude(){return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))}
+	get magitude(){return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2))}
+	get direction(){return Math.atan2(this.y,this.x)}
 	Vec3ify(){return new vector3(this.x,this.y,0)}
 	Vec4ify(){return new vector4(this.x,this.y,0,0)}
 }
@@ -17,7 +18,7 @@ class vector3{
 		this.z = z
 	}
 	Listify(){return [this.x,this.y,this.z]}
-	get Magitude(){return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2) + Math.pow(this.z,2))}
+	get magitude(){return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2) + Math.pow(this.z,2))}
 	Vec2ify(){return new vector2(this.x,this.y)}
 	Vec4ify(){return new vector4(this.x,this.y,this.z,0)}
 	
@@ -34,7 +35,7 @@ class vector4{
 		this.w = w
 	}
 	Listify(){return [this.x,this.y,this.z,this.w]}
-	get Magitude(){return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2) + Math.pow(this.z,2) + Math.pow(this.w,2))}
+	get magitude(){return Math.sqrt(Math.pow(this.x,2) + Math.pow(this.y,2) + Math.pow(this.z,2) + Math.pow(this.w,2))}
 	Vec2ify(){return new vector2(this.x,this.y)}
 	Vec3ify(){return new vector3(this.x,this.y,this.z)}
 	
@@ -49,7 +50,7 @@ class vector4{
 }
 
 //vector quick hands
-const vec2 = (x=0,y=0) => new vector2(x,y)
+const vec2 = (x=0,y=null) => new vector2(x,(y === null)? x : 0)
 const vec3 = (x = 0, y = 0, z = 0) => new vector3(x,y,z)
 const vec4 = (x = 0, y = 0, z = 0, w = 0) => new vector4(x,y,z,w)
 
@@ -107,6 +108,7 @@ class e_tween{
 		this.update_interval = null
 		this.update_rate = updateRate
 		
+		this.play_time = 0
 		this.on_tween_end = new e_signal()
 	}
 	Update(){
@@ -115,7 +117,7 @@ class e_tween{
 			this.Stop()
 		}
 		eval(this.target + "=" + lerp(this.initial_value,this.end_value,Math.min((curDate - this.start_date)/this.end_time,1)))
-		//console.log("Tick",(curDate - this.start_date))
+		console.log("Tick",(curDate - this.start_date),":",(curDate - this.start_date)/this.end_time)
 	}
 	Play(){
 		this.is_moving = true
@@ -227,7 +229,7 @@ Array.prototype.Vec2ify = function(){
 
 Array.prototype.Vec3ify = function(){
 	if(this.length >= 2){
-		if(this.length == 2){return new vector2(this[0],this[1])}
+		if(this.length == 2){return new vector3(this[0],this[1],0)}
 		return new vector3(this[0],this[1],this[2])
 	}else{
 		if(this.length == 1){
@@ -240,8 +242,8 @@ Array.prototype.Vec3ify = function(){
 
 Array.prototype.Vec4ify = function(){
 	if(this.length >= 2){
-		if(this.length == 2){return new vector2(this[0],this[1])}
-		if(this.length == 3){return new vector3(this[0],this[1],this[2])}
+		if(this.length == 2){return new vector4(this[0],this[1],0,0)}
+		if(this.length == 3){return new vector4(this[0],this[1],this[2],0)}
 		return new vector4(this[0],this[1],this[2],this[3])
 	}else{
 		if(this.length == 1){

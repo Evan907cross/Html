@@ -11,8 +11,8 @@ const e_math = {
 		point.x -= origin.x
 		point.y -= origin.y
 		
-		let dx = (point.x * Math.cos(rad)) - (point.y * Math.sin(rad))
-		let dy = (point.x * Math.sin(rad)) + (point.y * Math.cos(rad))
+		const dx = (point.x * Math.cos(rad)) - (point.y * Math.sin(rad))
+		const dy = (point.x * Math.sin(rad)) + (point.y * Math.cos(rad))
 		
 		return new vector2(dx + origin.x,dy + origin.y)
 	},
