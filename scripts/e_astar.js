@@ -58,8 +58,8 @@ function e_astar(StartNode,EndNode,Nodes){
     let interations = 0
 
     while(interations < 50){
-        let current = (interations == 0)? StartNode : e_as_getLowestFCost() 
-        RemoveIFromArray(OPEN,OPEN.findIndex(current))
+        let current = (interations == 0)? e_as_getLowestFCost(OPEN) : StartNode 
+        RemoveIFromArray(OPEN,OPEN.indexOf(current))
         CLOSED.push(current)
 
         if(current == EndNode){return true}
@@ -67,9 +67,9 @@ function e_astar(StartNode,EndNode,Nodes){
         const neighbours = e_as_getNodesNeighbours(current,Nodes)
         for(ni = 0; ni < neighbours.length; ni ++){
             const nei = neighbours[ni]
-            if(CLOSED.findIndex(nei) == -1 || !nei.IsTraversable){continue}
+            if(CLOSED.indexOf(nei) == -1 || !nei.IsTraversable){continue}
             nei.GenerateFCost(current,StartNode,EndNode) // and set parent
-            if(OPEN.findIndex(nei) == -1){
+            if(OPEN.indexOf(nei) == -1){
                 OPEN.push(nei)
             }
         }
