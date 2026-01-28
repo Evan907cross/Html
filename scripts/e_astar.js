@@ -20,6 +20,7 @@ class e_as_node{
     }
 }
 
+//Should probably make this a function not unquie to this file
 function RemoveIFromArray(array,i){
     return [...array.slice(0,i),...array.slice(i + 1)]
 }
