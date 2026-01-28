@@ -1,7 +1,7 @@
 //requires e_math.js(du) and structure_classes.js (or were ever your "vector2" class it stored/keeped)
 
 const e_as_MaxDistanceForNodeToQualifyAsNeighbour = math_e.distance(new vector2(0,0),new vector2(16,16)) //long ass name
-const e_as_limit = 50
+const e_as_limit = 50 //here just for testing reasons (just incase I fuck up and make a indefinite while loop [I don't trust Whiles])
 
 class e_as_node{
     constructor(x = 0,y = 0,traversable = true,name = "node"){
@@ -78,7 +78,7 @@ function e_astar(StartNode,EndNode,Nodes){
     }
 
     if(interations >= 50){
-        console.warn("A* Pathing Timed Out :(")
+        console.warn("A* Pathing Timed Out. At 1st While loop :(")
         return false
     }
 
@@ -86,9 +86,17 @@ function e_astar(StartNode,EndNode,Nodes){
     let CurrentPathNode = EndNode
 
     //Find Da Path
+    interations = 0
     while(CurrentPathNode.Parent != null || CurrentPathNode != StartNode){
+        if(interations >= e_as_limit){break}else{interations += 1}
+
         path.push(CurrentPathNode.Parent)
         CurrentPathNode = CurrentPathNode.Parent
+    }
+
+    if(interations >= 50){
+        console.warn("A* Pathing Timed Out. At 2nd While loop :(")
+        return false
     }
 
     //Note: the path starts from the end to start, instead of start to end. So I guess maybe make a function to "flip" the array
