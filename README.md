@@ -1,9 +1,5 @@
 --------- TODO --------------
-e_tween:
-    add lerp styles
 
-e_math:
-    add more
+Port over all progress made from of Chrome book dev branch
 
-e_input:
-    Make the Input system
+Test and Finish A* pathing
