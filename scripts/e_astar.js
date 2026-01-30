@@ -41,9 +41,7 @@ class e_as_node{
     }
 }
 
-Array.prototype.RemoveI = function(i){
-    return [...this.slice(0,i),...this.slice(i + 1)]
-}
+Array.prototype.RemoveI = (i) => [...this.slice(0,i),...this.slice(i + 1)]
 
 //Should probably make this a function not unquie to this file
 function RemoveIFromArray(array,i){    

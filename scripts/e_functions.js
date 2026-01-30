@@ -32,7 +32,21 @@ function HtmlSeperateUnit(val=0){
     }else{
         return [val,0]
     }
+    console.warn("Failed to seperate Html Unit : ",val)
 	return false
+}
+
+//ported from e_astar
+/*
+Array.prototype.RemoveI = function(i){
+    return [...this.slice(0,i),...this.slice(i + 1)]
+}
+*/
+
+Array.prototype.RemoveI = (i) => [...this.slice(0,i),...this.slice(i + 1)]
+
+function RemoveIFromArray(array,i){    
+    return [...array.slice(0,i),...array.slice(i + 1)]
 }
 
 //RIP e_color
