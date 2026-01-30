@@ -21,6 +21,31 @@ const e_math = {
 		
 		return new vector2(dx + origin.x,dy + origin.y)
 	},
+
+	rotate_3d_r : function(rad,point,origin){
+		//ROLL,PITCH,YAW,x,y,z,px,py,pz
+        point.x -= origin.x
+        point.y -= origin.y
+        point.z -= origin.z
+        //let R = new vector3()
+        let rx = new vector3(
+            point.x,
+            (y * Math.cos(rad.x)) - (z * Math.sin(rad.x)),
+            (y * Math.sin(rad.x)) + (z * Math.cos(rad.x))
+                            )
+        let ry = new vector3(
+            (rx.x * Math.cos(rad.y)) - (rx.z * Math.sin(rad.y)),
+            rx.y,
+            (rx.x * Math.sin(rad.y)) + (rx.z * Math.cos(rad.y))
+        )
+        let rz = new vector3(
+            (ry.x * Math.cos(rad.z)) - (ry.y * Math.sin(rad.z)),
+            (ry.x * Math.sin(rad.z)) + (ry.y * Math.cos(rad.z)),
+            ry.z
+        )
+		
+        return new vector3(rz.x + origin.x,rz.y + origin.y,rz.z + origin.z)
+	},
 	clamp :  (x,min=0,max=100) => Math.max(Math.min(x,max),min),
 }
 
